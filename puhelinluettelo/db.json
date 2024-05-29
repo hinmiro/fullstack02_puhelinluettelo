@@ -1,29 +1,54 @@
 {
-  "persons":[
+  "persons": [
     {
       "name": "Arto Hellas",
       "number": "040-123456",
-      "id": 1
+      "id": "1"
     },
     {
       "name": "Ada Lovelace",
       "number": "39-44-5323523",
-      "id": 2
+      "id": "2"
     },
     {
       "name": "Dan Abramov",
       "number": "12-43-234345",
-      "id": 3
+      "id": "3"
     },
     {
       "name": "Mary Poppendieck",
       "number": "39-23-6423122",
-      "id": 4
+      "id": "4"
     },
     {
       "name": "Bruce Banner",
       "number": "53-223-554335",
-      "id": 5
+      "id": "5"
+    },
+    {
+      "id": "36c5",
+      "name": "sini",
+      "number": "666666"
+    },
+    {
+      "id": "fcce",
+      "name": "jedi",
+      "number": "69696969"
+    },
+    {
+      "id": "fbab",
+      "name": "svengi",
+      "number": "5432178"
+    },
+    {
+      "id": "4292",
+      "name": "poju",
+      "number": "000089"
+    },
+    {
+      "id": "c95c",
+      "name": "milo",
+      "number": "8888"
     }
   ]
 }

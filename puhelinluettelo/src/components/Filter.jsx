@@ -22,9 +22,10 @@ const Filter = ({ persons }) => {
       <br />
       <table>
         <tbody>
-          {filteredPersons.map((person, i) => (
-            <Person key={i} person={person} />
-          ))}
+          {filteredPersons &&
+            filteredPersons.map((person, i) => (
+              <Person key={i} person={person} />
+            ))}
         </tbody>
       </table>
     </>
