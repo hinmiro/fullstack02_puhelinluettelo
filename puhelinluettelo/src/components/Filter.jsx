@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Person from "./Person.jsx";
 
-const Filter = ({ persons }) => {
+const Filter = ({ persons, setPersons }) => {
   const [newFilter, setNewFilter] = useState("");
   const [filteredPersons, setFilteredPersons] = useState(persons);
 
@@ -24,7 +24,12 @@ const Filter = ({ persons }) => {
         <tbody>
           {filteredPersons &&
             filteredPersons.map((person, i) => (
-              <Person key={i} person={person} />
+              <Person
+                key={i}
+                person={person}
+                setPersons={setPersons}
+                persons={persons}
+              />
             ))}
         </tbody>
       </table>

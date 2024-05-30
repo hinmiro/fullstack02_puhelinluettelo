@@ -1,10 +1,13 @@
 import fetchData from "../services/phoneBook.js";
 
 const Person = (props) => {
-  const { person } = props;
+  const { person, setPersons, persons } = props;
+
   const handleDelete = () => {
     if (window.confirm(`Are you sure to delete ${person.name} from book`)) {
-      fetchData.remove(person.id);
+      fetchData.remove(person.id).then((removedPerson) => {
+        setPersons(persons.filter((person) => person.id !== removedPerson.id));
+      });
     }
   };
 
