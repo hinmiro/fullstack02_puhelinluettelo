@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Person from "./Person.jsx";
 
-const Filter = ({ persons, setPersons }) => {
+const Filter = ({ persons, setPersons, setMessage, setRemove }) => {
   const [newFilter, setNewFilter] = useState("");
   const [filteredPersons, setFilteredPersons] = useState(persons);
 
@@ -29,6 +29,8 @@ const Filter = ({ persons, setPersons }) => {
                 person={person}
                 setPersons={setPersons}
                 persons={persons}
+                setMessage={setMessage}
+                setRemove={setRemove}
               />
             ))}
         </tbody>

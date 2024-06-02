@@ -1,13 +1,28 @@
 import fetchData from "../services/phoneBook.js";
 
 const Person = (props) => {
-  const { person, setPersons, persons } = props;
+  const { person, setPersons, persons, setRemove, setMessage } = props;
 
   const handleDelete = () => {
     if (window.confirm(`Are you sure to delete ${person.name} from book`)) {
-      fetchData.remove(person.id).then((removedPerson) => {
-        setPersons(persons.filter((person) => person.id !== removedPerson.id));
-      });
+      fetchData
+        .remove(person.id)
+        .then((removedPerson) => {
+          setPersons(
+            persons.filter((person) => person.id !== removedPerson.id),
+          );
+        })
+        .catch((err) => {
+          setRemove(true);
+          setMessage(`${person.name} already removed from the server`);
+        });
+      setRemove(true);
+      setMessage(`${person.name} remove from phonebook`);
+
+      setTimeout(() => {
+        setRemove(false);
+        setMessage(null);
+      }, 3000);
     }
   };
 

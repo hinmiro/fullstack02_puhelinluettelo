@@ -1,10 +1,13 @@
 import { useState } from "react";
 import Filter from "./Filter.jsx";
 import fetchData from "../services/phoneBook.js";
+import Notification from "./Notification.jsx";
 
 const PersonForm = ({ persons, setPersons }) => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
+  const [message, setMessage] = useState(null);
+  const [remove, setRemove] = useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -16,16 +19,23 @@ const PersonForm = ({ persons, setPersons }) => {
         )
       ) {
         const updatedPerson = { ...personExists, number: newNumber };
+        setMessage(`Changed phone number on ${newName} to ${newNumber}`);
 
-        fetchData.update(updatedPerson).then((returnedPerson) => {
-          setPersons((persons) =>
-            persons.map((person) =>
-              person.id !== personExists.id ? returnedPerson : person,
-            ),
-          );
-          setNewName("");
-          setNewNumber("");
-        });
+        fetchData
+          .update(updatedPerson)
+          .then((returnedPerson) => {
+            setPersons((persons) =>
+              persons.map((person) =>
+                person.id !== personExists.id ? returnedPerson : person,
+              ),
+            );
+            setNewName("");
+            setNewNumber("");
+          })
+          .catch((err) => {
+            setRemove(true);
+            setMessage(`${newName} has already been removed from server`);
+          });
       }
     } else {
       fetchData
@@ -33,9 +43,15 @@ const PersonForm = ({ persons, setPersons }) => {
         .then((newPerson) => {
           setPersons(persons.concat(newPerson));
         });
+      setMessage(`Added ${newName} to phonebook`);
     }
     setNewName("");
     setNewNumber("");
+
+    setTimeout(() => {
+      setMessage(null);
+      setRemove(false);
+    }, 3000);
   };
 
   const handleNewName = (event) => {
@@ -50,6 +66,7 @@ const PersonForm = ({ persons, setPersons }) => {
 
   return (
     <>
+      <Notification message={message} remove={remove} />
       <form onSubmit={handleSubmit}>
         <h3>Add new Number</h3>
         <div>
@@ -62,7 +79,13 @@ const PersonForm = ({ persons, setPersons }) => {
           <button type="submit">add</button>
         </div>
       </form>
-      <Filter key={persons.length} persons={persons} setPersons={setPersons} />
+      <Filter
+        key={persons.length}
+        persons={persons}
+        setPersons={setPersons}
+        setRemove={setRemove}
+        setMessage={setMessage}
+      />
     </>
   );
 };
