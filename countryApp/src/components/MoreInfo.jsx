@@ -23,9 +23,7 @@ const MoreInfo = ({ country }) => {
         </tr>
       </tbody>
       <tfoot>
-        <tr>
-          <Weather country={country} />
-        </tr>
+        <Weather country={country} />
       </tfoot>
     </>
   );
