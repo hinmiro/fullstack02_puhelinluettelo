@@ -28,7 +28,6 @@ const Filter = ({ persons, setPersons, setMessage, setRemove }) => {
                 key={i}
                 person={person}
                 setPersons={setPersons}
-                persons={persons}
                 setMessage={setMessage}
                 setRemove={setRemove}
               />

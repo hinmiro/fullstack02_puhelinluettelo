@@ -23,19 +23,16 @@ const PersonForm = ({ persons, setPersons }) => {
 
         fetchData
           .update(updatedPerson)
-          .then((returnedPerson) => {
-            setPersons((persons) =>
-              persons.map((person) =>
-                person.id !== personExists.id ? returnedPerson : person,
-              ),
-            );
-            setNewName("");
-            setNewNumber("");
+          .then((returnedPersons) => {
+            console.log(returnedPersons);
+            setPersons(returnedPersons);
           })
           .catch((err) => {
             setRemove(true);
             setMessage(`${newName} has already been removed from server`);
           });
+        setNewName("");
+        setNewNumber("");
       }
     } else {
       fetchData
